@@ -22,3 +22,8 @@ Experiment with set \ get cookie on the server
   // Retrieve the specific cookie value
   const cookieValue = cookieObject[name];
 ```
+
+<h2>Storage</h2>
+The cookie is save on the browser
+
+<img src='./figs/cookies-on-browser.png/>
