@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { COOKIE_MAX_AGE_MS, COOKIE_NAME } from "@/logic/constants";
 
 const Home = () => {
   const [cookieValue, setCookieValue] = useState<string | null>(null);
@@ -25,6 +26,8 @@ const Home = () => {
   return (
     <div>
       <h1>Cookie Management</h1>
+      <h4>Cookie Name : {COOKIE_NAME}</h4>
+      <h4>Max-Age : {COOKIE_MAX_AGE_MS} [ms]</h4>
       <button onClick={setCookie}>Set Cookie</button>
       <br />
       <button onClick={getCookie}>Get Cookie</button>
