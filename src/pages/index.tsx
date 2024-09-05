@@ -7,7 +7,7 @@ const Home = () => {
 
   const setCookie = async () => {
     try {
-      const response = await axios.get("/api/set-cookie");
+      const response = await axios.post("/api/set-cookie");
       console.log(response.data.message);
     } catch (error) {
       console.error("Error setting cookie:", error);
