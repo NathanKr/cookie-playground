@@ -3,6 +3,7 @@ Experiment with set \ get cookie on the server
 
 <h2>Design</h2>
 <h3>Set on the server</h3>
+This will cause the cookie to be send to the client and will be saved on the browser storage
 
 ```ts
   const name = COOKIE_NAME, value = COOKIE_VALUE;
@@ -12,6 +13,7 @@ Experiment with set \ get cookie on the server
 ```
 
 <h3>Get on the server</h3>
+This code show that the cookie is accessable on the server because it is sent on every http request
 
 ```ts
   const name = COOKIE_NAME
@@ -26,4 +28,4 @@ Experiment with set \ get cookie on the server
 <h2>Storage</h2>
 The cookie is save on the browser
 
-<img src='./figs/cookies-on-browser.png/>
+<img src='./figs/cookies-on-browser.png'/>
