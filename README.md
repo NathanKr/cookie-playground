@@ -12,6 +12,10 @@ This will cause the cookie to be send to the client and will be saved on the bro
   res.setHeader("Set-Cookie", `${name}=${value}; Path=/; HttpOnly`);
 ```
 
+The cookie is save on the browser
+
+<img src='./figs/cookies-on-browser.png'/>
+
 <h3>Get on the server</h3>
 This code show that the cookie is accessable on the server because it is sent on every http request
 
@@ -25,7 +29,3 @@ This code show that the cookie is accessable on the server because it is sent on
   const cookieValue = cookieObject[name];
 ```
 
-<h2>Storage</h2>
-The cookie is save on the browser
-
-<img src='./figs/cookies-on-browser.png'/>
