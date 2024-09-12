@@ -1,44 +1,60 @@
-<h2>Motivation</h2>
-Experiment with set \ get cookie on the server
+  <h1>Cookie Handling on the Server</h1>
 
-<h2>Design</h2>
-<h3>Set on the server</h3>
-This will cause the cookie to be send to the client and will be saved on the browser storage
+  <h2>Motivation</h2>
+  <p>Experiment with setting and retrieving cookies on the server to understand how they work.</p>
 
-```ts
-  const name = COOKIE_NAME,
-    value = COOKIE_VALUE;
-  // --- Sets a cookie with a name and value, valid for the entire domain,
-  // --- and accessible only via HTTP.
-
-  // --- The cookie will be sent to the server with every subsequent HTTP request
-  // --- made to the same domain that set the cookie
-
-  // --- If the cookie name exist its value will be overide (i.e. update) otherwise
-  // --- it will be added to the rest of the cookies(i.e. create)
-
-  // --- after COOKIE_MAX_AGE_MS milsec the cookie will not be sent from the client and  
-  // --- later the browser will remove it
-  res.setHeader(
-    "Set-Cookie",
-    `${name}=${value}; Path=/; HttpOnly; Max-Age=${COOKIE_MAX_AGE_MS}`
-  );
-```
-
-The cookie is save on the browser
-
-<img src='./figs/cookies-on-browser.png'/>
-
-<h3>Get on the server</h3>
-This code show that the cookie is accessable on the server because it is sent on every http request
+  <h2>Design</h2>
+  <h3>Setting a Cookie on the Server</h3>
+  <p>The following example shows how to set a cookie on the server that will be sent to the client and stored in the browser's cookie storage:</p>
 
 ```ts
-  const name = COOKIE_NAME
-  const cookies = req.headers.cookie;
-  // Parse the cookies
-  const cookieArray = cookies.split("; ").map(cookie => cookie.split("="));
-  const cookieObject = Object.fromEntries(cookieArray);
-  // Retrieve the specific cookie value
-  const cookieValue = cookieObject[name];
+const name = COOKIE_NAME,
+  value = COOKIE_VALUE;
+
+// Set a cookie with a name and value. It will be accessible only via HTTP,
+// meaning it won't be accessible through JavaScript (HttpOnly).
+
+// This cookie will be sent to the server with every subsequent HTTP request
+// made to the same domain that originally set the cookie.
+
+// If the cookie with this name already exists, its value will be updated.
+// Otherwise, it will be created as a new cookie.
+
+// After COOKIE_MAX_AGE_MS milliseconds, the cookie will expire and be removed
+// from the browser storage.
+
+res.setHeader(
+  "Set-Cookie",
+  `${name}=${value}; Path=/; HttpOnly; Max-Age=${COOKIE_MAX_AGE_MS}`
+);
 ```
 
+  <h3>Behavior</h3>
+  <p><strong>HttpOnly:</strong> The cookie is accessible only by the server, not by JavaScript on the client side.</p>
+  <p><strong>Max-Age:</strong> Specifies how long (in milliseconds) the cookie should be valid. Once expired, the cookie will be removed.</p>
+
+  <h3>Browser Storage Example</h3>
+  <p>Once the cookie is set, it is saved in the browser's cookie storage, as shown in the example screenshot below:</p>
+  
+  <img src="./figs/cookies-on-browser.png" alt="Cookies in Browser" />
+
+  <h3>Retrieving a Cookie on the Server</h3>
+  <p>Cookies are sent by the client with every HTTP request. Here's how you can parse and retrieve a specific cookie on the server:</p>
+
+```ts
+const name = COOKIE_NAME;
+const cookies = req.headers.cookie;
+
+// Parse the cookies into key-value pairs
+const cookieArray = cookies.split("; ").map((cookie) => cookie.split("="));
+const cookieObject = Object.fromEntries(cookieArray);
+
+// Retrieve the value of the specific cookie by its name
+const cookieValue = cookieObject[name];
+```
+
+  <h3>Key Points</h3>
+  <ul>
+    <li>Cookies are sent by the browser with each HTTP request to the same domain.</li>
+    <li>They are stored as a string in the <code>req.headers.cookie</code> field, which needs to be parsed to access individual cookie values.</li>
+  </ul>
