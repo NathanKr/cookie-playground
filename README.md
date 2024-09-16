@@ -23,7 +23,9 @@
   <h2>Setting a Cookie on the Server</h2>
   <p>The following example shows how to set a cookie on the server that will be sent to the client and stored in the browser's cookie storage:</p>
 
-```ts
+
+<pre>
+<code class='language-typescript'>
 const name = COOKIE_NAME,
   value = COOKIE_VALUE;
 
@@ -43,7 +45,8 @@ res.setHeader(
   "Set-Cookie",
   `${name}=${value}; Path=/; HttpOnly; Max-Age=${COOKIE_MAX_AGE_MS}`
 );
-```
+</code>
+</pre>
 
   <h2>Behavior</h2>
   <p><strong>HttpOnly:</strong> The cookie is accessible only by the server, not by JavaScript on the client side.</p>
@@ -57,7 +60,9 @@ res.setHeader(
   <h2>Retrieving a Cookie on the Server</h2>
   <p>Cookies are sent by the client with every HTTP request. Here's how you can parse and retrieve a specific cookie on the server:</p>
 
-```ts
+
+<pre>
+<code class='language-typescript'>
 const name = COOKIE_NAME;
 const cookies = req.headers.cookie;
 
@@ -67,7 +72,8 @@ const cookieObject = Object.fromEntries(cookieArray);
 
 // Retrieve the value of the specific cookie by its name
 const cookieValue = cookieObject[name];
-```
+</code>
+</pre>
 
 <h2>Key Points</h2>
 <ul>
