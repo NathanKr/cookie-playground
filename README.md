@@ -24,8 +24,7 @@
   <p>The following example shows how to set a cookie on the server that will be sent to the client and stored in the browser's cookie storage:</p>
 
 
-<pre>
-<code class='language-typescript'>
+```typescript
 const name = COOKIE_NAME,
   value = COOKIE_VALUE;
 
@@ -38,6 +37,7 @@ const name = COOKIE_NAME,
 // If the cookie with this name already exists, its value will be updated.
 // Otherwise, it will be created as a new cookie.
 
+
 // After COOKIE_MAX_AGE_MS milliseconds, the cookie will expire and be removed
 // from the browser storage.
 
@@ -45,24 +45,23 @@ res.setHeader(
   "Set-Cookie",
   `${name}=${value}; Path=/; HttpOnly; Max-Age=${COOKIE_MAX_AGE_MS}`
 );
-</code>
-</pre>
-
-  <h2>Behavior</h2>
-  <p><strong>HttpOnly:</strong> The cookie is accessible only by the server, not by JavaScript on the client side.</p>
-  <p><strong>Max-Age:</strong> Specifies how long (in milliseconds) the cookie should be valid. Once expired, the cookie will be removed.</p>
-
-  <h2>Browser Storage Example</h2>
-  <p>Once the cookie is set, it is saved in the browser's cookie storage, as shown in the example screenshot below:</p>
-  
-  <img src="./figs/cookies-on-browser.png" alt="Cookies in Browser" />
-
-  <h2>Retrieving a Cookie on the Server</h2>
-  <p>Cookies are sent by the client with every HTTP request. Here's how you can parse and retrieve a specific cookie on the server:</p>
+```
 
 
-<pre>
-<code class='language-typescript'>
+<h2>Behavior</h2>
+<p><strong>HttpOnly:</strong> The cookie is accessible only by the server, not by JavaScript on the client side.</p>
+<p><strong>Max-Age:</strong> Specifies how long (in milliseconds) the cookie should be valid. Once expired, the cookie will be removed.</p>
+
+<h2>Browser Storage Example</h2>
+<p>Once the cookie is set, it is saved in the browser's cookie storage, as shown in the example screenshot below:</p>
+
+<img src="./figs/cookies-on-browser.png" alt="Cookies in Browser" />
+
+<h2>Retrieving a Cookie on the Server</h2>
+<p>Cookies are sent by the client with every HTTP request. Here's how you can parse and retrieve a specific cookie on the server:</p>
+
+
+```typescript
 const name = COOKIE_NAME;
 const cookies = req.headers.cookie;
 
@@ -72,8 +71,7 @@ const cookieObject = Object.fromEntries(cookieArray);
 
 // Retrieve the value of the specific cookie by its name
 const cookieValue = cookieObject[name];
-</code>
-</pre>
+```
 
 <h2>Key Points</h2>
 <ul>
